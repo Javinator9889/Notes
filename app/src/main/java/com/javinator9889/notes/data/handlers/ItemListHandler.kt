@@ -74,10 +74,10 @@ class ItemListHandler(
 ) : BaseFragmentHandler(fragment, lifecycleOwner), SwipeRefreshLayout.OnRefreshListener,
     SimpleSwipeCallback.ItemSwipeCallback,
     ISelectionListener<NoteItem> {
-    private val displayedNotes = SparseArray<Date>()
-    private val selectedNotesSet = mutableSetOf<NoteItem>()
     val itemAdapter = ItemAdapter<NoteItem>()
     val recyclerViewAdapter = RecyclerViewAdapter()
+    private val displayedNotes = SparseArray<Date>()
+    private val selectedNotesSet = mutableSetOf<NoteItem>()
 
     fun setupViews() = lifecycleOwner.lifecycleScope.launchWhenCreated {
         val activityLauncher = object : ClickableSpan() {
@@ -144,15 +144,9 @@ class ItemListHandler(
         if (direction != ItemTouchHelper.LEFT)
             return
         itemAdapter.remove(position)
+        noteViewModel.delete(item.noteId)
         Snackbar.make(fragment.recyclerList, R.string.item_removed, Snackbar.LENGTH_SHORT)
-            .setAction(R.string.undo) { itemAdapter.add(position, item) }
-            .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
-                override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-                    super.onDismissed(transientBottomBar, event)
-                    if (event != DISMISS_EVENT_ACTION)
-                        noteViewModel.delete(item.noteId)
-                }
-            })
+            .setAction(R.string.undo) { noteViewModel.insert(item.data) }
             .show()
     }
 
@@ -195,16 +189,15 @@ class ItemListHandler(
                 fastItemAdapter = FastItemAdapter(itemAdapter)
                 val rvManager = LinearLayoutManager(view.context).apply {
                     isSmoothScrollbarEnabled = true
-                    isAutoMeasureEnabled = true
                 }
                 withContext(Dispatchers.Main) {
                     with(fragment.recyclerList) {
-                        invalidate()
                         layoutManager = rvManager
                         adapter = fastItemAdapter
                         itemAnimator = DefaultItemAnimator()
                         isNestedScrollingEnabled = true
                         addOnScrollListener(this@RecyclerViewAdapter)
+                        invalidate()
                     }
                 }
                 selectExtension = fastItemAdapter.getSelectExtension().apply {
@@ -285,7 +278,6 @@ class ItemListHandler(
             ): Boolean {
                 // delete the selected items with the SubItemUtil to correctly handle sub items
                 // this will even delete empty headers if you want to
-//                selectExtension.deleteAllSelectedItems()
                 val selectedItems = selectExtension.selectedItems
                 undoHelper.remove(
                     fragment.recyclerList,
@@ -305,13 +297,6 @@ class ItemListHandler(
                         }
                     }
                 })
-                /*SubItemUtil.deleteSelected(
-                    fastItemAdapter as FastAdapter<IItem<*>>,
-                    selectExtension,
-                    expandableExtension,
-                    notifyParent = true,
-                    deleteEmptyHeaders = true
-                )*/
                 //as we no longer have a selection so the actionMode can be finished
                 mode.finish()
                 //we consume the event

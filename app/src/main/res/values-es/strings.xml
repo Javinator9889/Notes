@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Notas</string>
+    <string name="search">Búsqueda</string>
+    <string name="no_items">No se han encontrado elementos.</string>
+    <string name="click_to_create">¡Crea uno haciendo click aquí!</string>
+    <string name="title">Título</string>
+    <string name="content">Contenido de la nota</string>
+    <string name="setup_reminder">Establecer un recordatorio</string>
+    <string name="creation_date">Creado en: %1$s</string>
+    <string name="creating">Creando una nota nueva…</string>
+    <string name="discarding_empty">Descartando nota vacía.</string>
+    <string name="item_removed">Elemento eliminado</string>
+    <string name="undo">Deshacer</string>
+    <string name="last_modification">Editado: %1$s</string>
+    <string name="editing">Editando nota existente…</string>
+    <string name="remove">Eliminar</string>
+    <string name="discard">Descartar</string>
+    <plurals name="notes">
+        <item quantity="one">%d nota</item>
+        <item quantity="other">%d notas</item>
+    </plurals>
+    <string name="note_notifications_name">Recordatorios personalizados</string>
+    <string name="note_notifications_desc">Cuando creas una nota, hay una opción para establecer
+        un recordatorio. Estando activo, la notificación mostrará el título y el contenido en
+        el tiempo establecido.
+    </string>
+    <string name="github">Ver el proyecto en GitHub</string>
+    <string name="no_browser">No hay ninguna aplicación de navegador que pueda hacer esta acción</string>
+</resources>

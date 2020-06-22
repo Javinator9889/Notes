@@ -8,13 +8,11 @@ android {
     compileSdkVersion 29
     buildToolsVersion '29.0.3'
 
-    android.defaultConfig.vectorDrawables.useSupportLibrary = true
-
     defaultConfig {
         applicationId 'com.javinator9889.notes'
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 16
+        versionCode 17
         versionName '1.0'
         multiDexEnabled true
         resConfigs 'en', 'es'
