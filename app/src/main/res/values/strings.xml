@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Notes</string>
+    <string name="search">Search</string>
+    <string name="no_items">No items were found.</string>
+    <string name="click_to_create">Create one by clicking here!</string>
+    <string name="title">Title</string>
+    <string name="content">Note content</string>
+    <string name="setup_reminder">Setup a reminder</string>
+    <string name="creation_date">Created at: %1$s</string>
+    <string name="creating">Creating a new note…</string>
+    <string name="discarding_empty">Discarding empty note.</string>
+    <string name="item_removed">Item removed</string>
+    <string name="undo">Undo</string>
+    <string name="last_modification">Edited: %1$s</string>
+    <string name="editing">Editing existing note…</string>
+    <string name="remove">Remove</string>
+    <string name="discard">Discard</string>
+    <plurals name="notes">
+        <item quantity="one">%d note</item>
+        <item quantity="other">%d notes</item>
+    </plurals>
+    <string name="note_notifications_name">Scheduled notifications</string>
+    <string name="note_notifications_desc">When creating a note, there is an option to setup
+        a reminder. When active, a notification will pop-up displaying both the note title and
+        content at the scheduled time.
+    </string>
+    <string name="github">View project in GitHub</string>
+    <string name="no_browser">There is no browser app that can do this action</string>
+</resources>
