@@ -53,8 +53,6 @@ class AlarmHandler(private val context: Context) {
         with(Intent(context, AlarmReceiver::class.java)) {
             action = ACTION_ALARM
             putExtra(ARG_BUNDLE, Bundle(1).apply { putParcelable(ARG_ALARM, alarm) })
-//            putExtra(ARG_ALARM, alarm)
-//            putExtra(ARG_ID, alarm.id)
             PendingIntent.getBroadcast(context, alarm.id, this, flags)
         }
 }
