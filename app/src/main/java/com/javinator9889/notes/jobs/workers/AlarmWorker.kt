@@ -23,10 +23,7 @@ import androidx.annotation.ArrayRes
 import androidx.annotation.StringRes
 import com.javinator9889.notes.jobs.alarms.Alarm
 import com.javinator9889.notes.utils.workers.Result
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import timber.log.Timber
 
 abstract class AlarmWorker(context: Context) {
@@ -44,9 +41,11 @@ abstract class AlarmWorker(context: Context) {
                 Timber.d("Result: $result")
                 if (result == Result.SUCCESS)
                     job.complete()
+                else
+                    job.cancel(message = result.name)
             } catch (t: Throwable) {
                 Timber.e(t, "Error in worker!")
-                job.completeExceptionally(t)
+                job.cancel("Unhandled exception in worker", t)
             }
         }
     }

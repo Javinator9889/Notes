@@ -43,8 +43,7 @@ class NoteAlarmWorker(context: Context, override val alarm: Alarm) : AlarmWorker
         Timber.d("Working...")
         val noteDao = NoteDatabase.getDatabase(context).noteDao()
         val repository = NoteRepository(noteDao)
-        val noteDeferred =
-            async(context = Dispatchers.IO) { repository.get(alarm.id) }
+        val noteDeferred = async(context = Dispatchers.IO) { repository.get(alarm.id) }
         val notificationsHandler = NotificationsHandler(
             context = context,
             channelId = NOTE_CHANNEL_ID,
