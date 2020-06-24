@@ -34,18 +34,15 @@ class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         Timber.d("Received alarm!")
         if (intent.action == ACTION_ALARM) {
-//        if (intent.hasExtra(ARG_ALARM)) {
             Timber.d("Extra has alarm")
             val bundle = intent.getBundleExtra(ARG_BUNDLE) ?: return
             val alarm = bundle.getParcelable<Alarm>(ARG_ALARM) ?: return
-//            val alarm = intent.getParcelableExtra<Alarm>(ARG_ALARM)!!
             Timber.d("Creating NoteAlarmWorker")
             val worker = NoteAlarmWorker(context, alarm)
             goAsync {
                 Timber.d("Broadcast going async")
                 worker.doWork()
             }
-//        }
         }
     }
 }
