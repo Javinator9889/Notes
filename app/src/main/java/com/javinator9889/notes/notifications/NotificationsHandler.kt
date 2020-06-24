@@ -59,8 +59,7 @@ class NotificationsHandler(
         priority: Int = NotificationCompat.PRIORITY_DEFAULT,
         longContent: CharSequence? = null,
         extras: Bundle? = null,
-        group: String? = null,
-        titleInBold: Boolean = false
+        group: String? = null
     ) {
         val actionIntent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
